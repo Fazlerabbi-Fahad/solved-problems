@@ -8,25 +8,37 @@ struct ListNode
     ListNode(int x) : val(x), next(NULL) {}
 };
 
-class Solution {
+class Solution
+{
 public:
-    ListNode* deleteDuplicates(ListNode* head) {
-        ListNode* tmp=head;
-        while(tmp->next!=NULL)
+    ListNode *deleteDuplicates(ListNode *head)
+    {
+        ListNode *tmp = head;
+        while (tmp->next != NULL)
         {
-            if(tmp->val==tmp->next->val)
+            if (tmp->val == tmp->next->val)
             {
-                tmp->next=tmp->next->next;
+                tmp->next = tmp->next->next;
             }
-            if(tmp->next==NULL) break;
-            else if(tmp->val!=tmp->next->val)
+            if (tmp->next == NULL)
+                break;
+            else if (tmp->val != tmp->next->val)
             {
-                tmp=tmp->next;
+                tmp = tmp->next;
             }
         }
+        return head;
     }
-    return head;
 };
+
+
+void printList(ListNode* head) {
+    while (head != NULL) {
+        cout << head->val << " ";
+        head = head->next;
+    }
+    cout << endl;
+}
 
 
 int main()
@@ -37,7 +49,6 @@ int main()
     ListNode *head = NULL;
     ListNode *tail = NULL;
 
-    
     for (int i = 0; i < n; ++i)
     {
         int x;
@@ -56,11 +67,14 @@ int main()
     }
 
     Solution sol;
-    ListNode *mid = sol.middleNode(head);
-    if (mid)
-        cout << "Middle Node Value: " << mid->val << endl;
-    else
+    ListNode* updatedHead = sol.deleteDuplicates(head);
+    
+    if (updatedHead) {
+        cout << "List after removing duplicates: ";
+        printList(updatedHead);
+    } else {
         cout << "List is empty." << endl;
+    }
 
     return 0;
 }
