@@ -15,42 +15,79 @@ public:
         st.push(x);
     }
 
+    // int pop()
+    // {
+    //     stack<int> newSt;
+    //     int last;
+    //     while(!st.empty())
+    //     {
+    //         int k=st.top();
+    //         st.pop();
+    //         if(st.empty())
+    //         {
+    //             last=k;
+    //             break;
+    //         }
+    //         newSt.push(k);
+    //     }
+    //     st=newSt;
+    //     return last;
+    // }
+
+    // int peek()
+    // {
+    //     stack<int> newSt;
+    //     int last;
+    //     while(!st.empty()){
+    //         int k=st.top();
+    //         st.pop();
+    //         if(st.empty()){
+    //             last=k;
+    //         }
+    //         newSt.push(k);
+    //     }
+    //     while(!newSt.empty()){
+    //         st.push(newSt.top());
+    //         newSt.pop();
+    //     }
+    //     return last;
+    // }
+
     int pop()
     {
-        stack<int> newSt;
-        int last;
-        while(!st.empty())
+        if (st.empty())
+            return -1;
+
+        int x = st.top();
+        st.pop();
+
+        if (st.empty())
         {
-            int k=st.top();
-            st.pop();
-            if(st.empty())
-            {
-                last=k;
-                break;
-            }
-            newSt.push(k);
+            return x; 
         }
-        st=newSt;
-        return last;
+
+        int res = pop(); 
+        st.push(x);      
+        return res;
     }
 
     int peek()
     {
-        stack<int> newSt;
-        int last;
-        while(!st.empty()){
-            int k=st.top();
-            st.pop();
-            if(st.empty()){
-                last=k;
-            }
-            newSt.push(k);
+        if (st.empty())
+            return -1;
+
+        int x = st.top();
+        st.pop();
+
+        if (st.empty())
+        {
+            st.push(x);
+            return x;
         }
-        while(!newSt.empty()){
-            st.push(newSt.top());
-            newSt.pop();
-        }
-        return last;
+
+        int res = peek();
+        st.push(x);
+        return res;
     }
 
     bool empty()
