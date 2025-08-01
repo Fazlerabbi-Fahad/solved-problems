@@ -11,35 +11,34 @@ struct ListNode
 class Solution
 {
 public:
-    ListNode *deleteDuplicates(ListNode *head)
+    void reverse(ListNode *&head, ListNode *cur)
     {
-        ListNode *tmp = head;
-        while (tmp != NULL && tmp->next != NULL)
+        if (cur->next == NULL)
         {
-            if (tmp->val == tmp->next->val)
-            {
-                tmp->next = tmp->next->next;
-            }
-            if (tmp->next == NULL)
-                break;
-            else if (tmp->val != tmp->next->val)
-            {
-                tmp = tmp->next;
-            }
+            head = cur;
+            return;
         }
+        reverse(head, cur->next);
+        cur->next->next = cur;
+        cur->next = NULL;
+    }
+    ListNode *reverseList(ListNode *head)
+    {
+        if(head==NULL) return head;
+        reverse(head,head);
         return head;
     }
 };
 
-
-void printList(ListNode* head) {
-    while (head != NULL) {
+void printList(ListNode *head)
+{
+    while (head != NULL)
+    {
         cout << head->val << " ";
         head = head->next;
     }
     cout << endl;
 }
-
 
 int main()
 {
@@ -67,12 +66,15 @@ int main()
     }
 
     Solution sol;
-    ListNode* updatedHead = sol.deleteDuplicates(head);
-    
-    if (updatedHead) {
+    ListNode *updatedHead = sol.reverseList(head);
+
+    if (updatedHead)
+    {
         cout << "List after removing duplicates: ";
         printList(updatedHead);
-    } else {
+    }
+    else
+    {
         cout << "List is empty." << endl;
     }
 
